@@ -1,0 +1,24 @@
+body{
+    background: linear-gradient(-22.5deg, #9500ff, #b500eb, #db00c0, #ea0069);
+    height: 100vh;
+    margin: 0px;
+}
+
+nav{
+    background-color: #04002c;
+    padding: 30px;
+}
+
+.top-content{
+    color: #FFFFFF;
+    width: 600px;
+    margin: auto;
+    text-align: center;
+
+    font-weight: 600;
+}
+
+.top-content h1{
+    text-shadow: 2px 2px 4px #0000006d;
+    font-family: 'Handjet';
+}
