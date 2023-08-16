@@ -11,14 +11,24 @@ nav{
 
 .top-content{
     color: #FFFFFF;
-    width: 600px;
+    width: 700px;
     margin: auto;
     text-align: center;
-
-    font-weight: 600;
+    margin-top: 120px;
 }
 
 .top-content h1{
     text-shadow: 2px 2px 4px #0000006d;
     font-family: 'Handjet';
+    font-size: 80px;
+    font-weight: 600;
+}
+
+.top-content p{
+    font-size: 30px;
+    width: 650px;
+    font-weight: 400;
+    font-family: 'Handjet';
+    text-shadow: 1px 1px 3px #0000006d;
+    margin-top: 60px;
 }
