@@ -1,5 +1,4 @@
 body{
-    background: linear-gradient(-22.5deg, #9500ff, #b500eb, #db00c0, #ea0069);
     height: 100vh;
     margin: 0px;
 }
@@ -10,11 +9,20 @@ nav{
 }
 
 .top-content{
+    background: linear-gradient(-22.5deg, #9500ff, #b500eb, #db00c0, #ea0069);
     color: #FFFFFF;
-    width: 700px;
+    /* width: 700px; */
+    width: 100vw;
+    height: 70vh;
+    
     margin: auto;
+    /* margin-top: 100px; */
     text-align: center;
-    margin-top: 120px;
+    /* padding: 130px 0px; */
+    padding-top: 100px;
+    padding-bottom: 50px;
+
+
 }
 
 .top-content h1{
@@ -22,13 +30,19 @@ nav{
     font-family: 'Handjet';
     font-size: 80px;
     font-weight: 600;
+    margin-top: 0;
 }
 
 .top-content p{
     font-size: 30px;
     width: 650px;
+    margin: auto;
     font-weight: 400;
     font-family: 'Handjet';
     text-shadow: 1px 1px 3px #0000006d;
     margin-top: 60px;
+}
+
+.quiz-section{
+    margin-top: 100px;
 }
