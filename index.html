@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Handjet:wght@300;400&display=swap" rel="stylesheet">
+
+    <script src="script.js"></script>
 </head>
 <body>
     <nav>
@@ -20,19 +22,35 @@
         <h1>Welcome to You Snooze, You Lose!</h1>
         <p>Get ready to test your knowledge across various categories. Stay sharp, the clock isn't your friend! Challenge yourself on *Hard* difficulty or
             just relax with the *Easy* mode. <br>How many questions can you answer before the timer runs out? Let's see!</p>
+
+        <div class="diff-categ">
+            <select name="difficulty" id="diffic">
+                <option value="">Please choose a difficulty</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+    
+            <select name="category" id="categ">
+                <option value="">Please choose a category</option>
+            </select>
+
+        </div>
+        <button class="start-btn">Start</button>
     </div>
+
 
     <div class="quiz-section">
         <div class="timer">
-            ABC
+            <!-- ABC -->
         </div>
 
         <div class="questions">
-            PQR
+            <!-- PQR -->
         </div>
 
         <div class="options">
-            <button>Option A</button><button>Option B</button><button>Option C</button><button>Option D</button>
+            <!-- <button>Option A</button><button>Option B</button><button>Option C</button><button>Option D</button> -->
         </div>
 
     </div>
