@@ -18,6 +18,8 @@ nav{
     /* margin-top: 100px; */
     text-align: center;
     padding: 60px 0px;
+
+
 }
 
 .top-content h1{
@@ -88,6 +90,52 @@ nav{
     background: linear-gradient(#ff992b, #ffd468);
 }
 
+.modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0000003f;
+    justify-content: center;
+    align-items: center;
+    animation: fade-in 0.3s ease-in-out;
+}
+
+.modal-content{
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#modal-close-btn{
+    background-color: #db00c0;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
 .quiz-section{
-    margin-top: 100px;
+    /* margin-top: 100px; */
+    display: none;
+    background: linear-gradient(-22.5deg, #9500ff, #b500eb, #db00c0, #ea0069);
+    color: #FFFFFF;
+    /* width: 700px; */
+    height: 600px;
+    margin: auto;
+    text-align: center;
+    padding: 60px 0px;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
