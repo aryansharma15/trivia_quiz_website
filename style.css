@@ -18,8 +18,6 @@ nav{
     /* margin-top: 100px; */
     text-align: center;
     padding: 60px 0px;
-
-
 }
 
 .top-content h1{
@@ -105,9 +103,13 @@ nav{
 
 .modal-content{
     background-color: #ffffff;
-    padding: 20px;
+    padding: 50px 70px;
     border-radius: 3px;
     text-align: center;
+}
+
+#modal-message{
+    font-size: 20px;
 }
 
 #modal-close-btn{
@@ -116,8 +118,17 @@ nav{
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+    margin-top: 20px;
+    font-size: 20px;
+    padding: 10px 30px;
+    border-radius: 3px;
+    box-shadow: 3px 3px 10px #0000006d;
+    transition: 150ms ease-in-out;
 }
 
+#modal-close-btn:active{
+    box-shadow: 2px 2px 5px #0000006d;
+}
 
 .quiz-section{
     /* margin-top: 100px; */
@@ -129,6 +140,30 @@ nav{
     margin: auto;
     text-align: center;
     padding: 60px 0px;
+}
+
+/* to make transitions smoother */
+.top-content, .quiz-section{
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.top-content.hidden, .quiz-section.hidden{
+    opacity: 0;
+    /* transition: opacity 0.5s ease-in-out; */
+    pointer-events: none;
+}
+
+.quiz-section.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+/* ----------------- */
+
+
+.score-card{
+    font-size: 20px;
+    font-family: 'DM Serif Display', serif;
 }
 
 @keyframes fade-in {

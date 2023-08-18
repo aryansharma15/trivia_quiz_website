@@ -35,9 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		startBtn.addEventListener("click", () => {
 			const selectedCategory = selCateg.value;
 			const selectedDifficulty = selDiffic.value;
+
 			if (selectedCategory !== "" && selectedDifficulty !== "") {
-				landingContent.style.display = "none";
-				quizSect.style.display = "block";
+				landingContent.classList.add("hidden");
+				quizSect.classList.remove("hidden");
+				// quizSect.classList.add("visible");
 				console.log(selectedCategory);
 				console.log(selectedDifficulty);
 			} else if (selectedCategory === "" && selectedDifficulty !== "") {
