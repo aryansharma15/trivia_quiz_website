@@ -38,6 +38,12 @@ nav{
     margin-top: 60px;
 }
 
+.foot{
+    position: fixed;
+    bottom: 0px;
+    margin: auto;
+}
+
 .diff-categ{
     margin-top: 60px;
     margin-bottom: 50px;
@@ -131,46 +137,65 @@ nav{
 }
 
 .quiz-section{
-    /* margin-top: 100px; */
+    /* visibility: hidden; */
     display: none;
     background: linear-gradient(-22.5deg, #9500ff, #b500eb, #db00c0, #ea0069);
     color: #FFFFFF;
-    /* width: 700px; */
-    height: 600px;
+    height: 700px;
     margin: auto;
     text-align: center;
-    padding: 60px 0px;
+    padding: 40px 0px;
+    padding-bottom: 0px;
+
 }
 
-/* to make transitions smoother */
-.top-content, .quiz-section{
+/* ssmoother transition */
+/* .top-content, .quiz-section{
+    display: block;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
 }
 
 .top-content.hidden, .quiz-section.hidden{
+    display: none;
     opacity: 0;
-    /* transition: opacity 0.5s ease-in-out; */
     pointer-events: none;
-}
+} */
 
-.quiz-section.visible {
-    opacity: 1;
-    pointer-events: auto;
+.quiz-section>p{
+    margin: 0px;
 }
-/* ----------------- */
-
 
 .score-card{
     font-size: 20px;
     font-family: 'DM Serif Display', serif;
+    position: absolute;
+    right: 150px;
 }
 
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.score-card p{
+    margin-top: 0px;
+}
+
+#forfeit-btn{
+    position: absolute;
+    left: 100px;
+    font-size: 18px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    box-shadow: 3px 3px 10px #0000006d;
+    padding: 20px 40px;
+    border-radius: 5px;
+    transition: active 250ms ease-in-out;
+    cursor: pointer;
+}
+
+#forfeit-btn:active{
+    box-shadow: 0px 0px 0px;
+
+}
+
+#forfeit-btn:hover{
+    background: linear-gradient(-45deg, #002766, #000000);
+    color: #ffffff;
 }

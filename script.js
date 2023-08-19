@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	const api = "https://the-trivia-api.com/v2/questions";
+	// const api = "https://the-trivia-api.com/v2/questions";
 	const selDiffic = document.getElementById("diffic");
 	const selCateg = document.getElementById("categ");
 	const startBtn = document.getElementsByClassName("start-btn")[0];
@@ -10,12 +10,27 @@ document.addEventListener("DOMContentLoaded", () => {
 	const alertMessage = document.getElementById("modal-message");
 	const alertBtn = document.getElementById("modal-close-btn");
 
+	const time = document.getElementsByClassName("time")[0];
+	console.log(time);
+
 	function selBackground(selection) {
 		if (selection.value === "") {
 			selection.classList.remove("selected");
 		} else {
 			selection.classList.add("selected");
 		}
+	}
+
+	function quizForfeit() {
+		location.reload();
+	}
+
+	async function startQuiz(categ) {
+		const apiUrl = `https://the-trivia-api.com/v2/questions?category=${encodeURI(categ)}`;
+		const data = await fetch(apiUrl);
+		const res = await data.json();
+
+		console.log(res);
 	}
 
 	function listeners() {
@@ -37,9 +52,18 @@ document.addEventListener("DOMContentLoaded", () => {
 			const selectedDifficulty = selDiffic.value;
 
 			if (selectedCategory !== "" && selectedDifficulty !== "") {
-				landingContent.classList.add("hidden");
-				quizSect.classList.remove("hidden");
-				// quizSect.classList.add("visible");
+				landingContent.style.display = "none";
+				quizSect.style.display = "block";
+				console.log("Running the display change");
+
+				const backBtn = document.getElementById("forfeit-btn");
+				backBtn.addEventListener("click", () => {
+					quizForfeit();
+				});
+
+				startQuiz(selectedCategory);
+
+				console.log(backBtn);
 				console.log(selectedCategory);
 				console.log(selectedDifficulty);
 			} else if (selectedCategory === "" && selectedDifficulty !== "") {
@@ -59,5 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	window.onload = () => {
 		listeners();
+		quizSect.classList.add("hidden");
 	};
 });
