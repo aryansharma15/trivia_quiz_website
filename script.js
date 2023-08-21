@@ -25,10 +25,82 @@ document.addEventListener("DOMContentLoaded", () => {
 		location.reload();
 	}
 
-	async function startQuiz(categ) {
-		const apiUrl = `https://the-trivia-api.com/v2/questions?category=${encodeURI(categ)}`;
+	function shuffleArr(array) {
+		const shuffled = array.slice();
+		for (let i = shuffled.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+		}
+
+		return shuffled;
+	}
+
+	function checkAnswer(isCorrect) {
+		if (isCorrect) {
+		} else {
+		}
+	}
+
+	function displayQuestions(quesData) {
+		// const questions = document.getElementsByClassName("questions");
+		const questions = document.querySelector(".questions");
+		questions.innerHTML = "";
+
+		const questionElement = document.createElement("div");
+		questionElement.classList.add("question");
+
+		questionElement.textContent = quesData.question;
+
+		const answerChoices = [...quesData.incorrect_answers, quesData.correct_answer];
+		const shuffledChoices = shuffleArr(answerChoices);
+
+		const optionsContainer = document.createElement("div");
+		optionsContainer.classList.add("options");
+
+		// console.log(options);
+		console.log(questions);
+		shuffledChoices.forEach((choice) => {
+			const optionElement = document.createElement("button");
+			optionElement.classList.add("choice");
+			optionElement.textContent = choice;
+
+			optionElement.addEventListener("click", () => {
+				checkAnswer(choice === quesData.correct_answer);
+			});
+
+			optionsContainer.appendChild(optionElement);
+		});
+
+		questionElement.appendChild(optionsContainer);
+		questions.appendChild(questionElement);
+	}
+
+	async function startQuiz(diffic) {
+		// const apiUrl = `https://opentdb.com/api.php?amount=10&category=19&difficulty=${diffic}&type=multiple`;
+		const apiUrl = `https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple`;
 		const data = await fetch(apiUrl);
 		const res = await data.json();
+
+		const questions = res.results;
+		l = questions.length;
+		let currentQuestionIndex = 0;
+
+		const displayNextQues = () => {
+			if (currentQuestionIndex < l) {
+				const currentQuestion = questions[currentQuestionIndex];
+				displayQuestions(currentQuestion);
+				currentQuestionIndex++;
+			} else {
+				console.log("Quiz Complete");
+			}
+		};
+
+		const optionsContainer = document.querySelector(".options");
+		optionsContainer.addEventListener("click", () => {
+			displayNextQues();
+		});
+
+		displayNextQues();
 
 		console.log(res);
 	}
@@ -61,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					quizForfeit();
 				});
 
-				startQuiz(selectedCategory);
+				startQuiz(selectedCategory, selectedDifficulty);
 
 				console.log(backBtn);
 				console.log(selectedCategory);

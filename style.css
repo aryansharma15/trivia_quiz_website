@@ -164,10 +164,12 @@ nav{
 
 .quiz-section>p{
     margin: 0px;
+    font-size: 14px;
+    text-shadow: 2px 2px 5px #0000003f;
 }
 
 .score-card{
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'DM Serif Display', serif;
     position: absolute;
     right: 150px;
@@ -175,6 +177,7 @@ nav{
 
 .score-card p{
     margin-top: 0px;
+    text-shadow: 2px 2px 5px #0000003f;
 }
 
 #forfeit-btn{
@@ -198,4 +201,30 @@ nav{
 #forfeit-btn:hover{
     background: linear-gradient(-45deg, #002766, #000000);
     color: #ffffff;
+}
+
+.questions{
+    margin-top: 200px;
+    font-size: 36px;
+    text-shadow: 2px 2px 5px #0000003f;
+}
+
+.options{
+    margin: auto;
+    width: 90vw;
+    margin-top: 50px;
+}
+
+.choice{
+    font-size: 20px;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    margin-right: 40px;
+    cursor: pointer;
+    border-radius: 3px;
+    background: linear-gradient(-90deg,#ffc14f, #e2b500);
+    border: 1px solid #0800a1;
+    color: #0800a1;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px #0000003f;
 }
