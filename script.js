@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	const alertBtn = document.getElementById("modal-close-btn");
 
 	const time = document.getElementsByClassName("time")[0];
-	console.log(time);
 
 	function selBackground(selection) {
 		if (selection.value === "") {
@@ -63,8 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const optionsContainer = document.createElement("div");
 		optionsContainer.classList.add("options");
 
-		// console.log(options);
-		console.log(questions);
+		// console.log(questions);
 		shuffledChoices.forEach((choice) => {
 			const optionElement = document.createElement("button");
 			optionElement.classList.add("choice");
@@ -103,15 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		};
 
-		const optionsContainer = document.querySelector(".options");
-		console.log(optionsContainer);
-		// optionsContainer.addEventListener("click", (event) => {
-		// 	if (event.target.classList.contains("choice")) {
-		// 		checkAnswer(event.target.textContent === quesData.correct_answer);
-		// 		displayNextQues();
-		// 	}
-		// });
-
 		displayNextQues();
 
 		const nextButton = document.getElementById("next-btn");
@@ -145,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (selectedCategory !== "" && selectedDifficulty !== "") {
 				landingContent.style.display = "none";
 				quizSect.style.display = "block";
-				console.log("Running the display change");
+				// console.log("Running the display change");
 
 				const backBtn = document.getElementById("forfeit-btn");
 				backBtn.addEventListener("click", () => {
@@ -154,9 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				startQuiz(selectedCategory, selectedDifficulty);
 
-				console.log(backBtn);
-				console.log(selectedCategory);
-				console.log(selectedDifficulty);
+				// console.log(backBtn);
+				// console.log(selectedCategory);
+				// console.log(selectedDifficulty);
 			} else if (selectedCategory === "" && selectedDifficulty !== "") {
 				showAlert("Please select a valid category to continue.");
 			} else if (selectedCategory !== "" && selectedDifficulty === "") {
