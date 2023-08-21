@@ -211,20 +211,38 @@ nav{
 
 .options{
     margin: auto;
-    width: 90vw;
-    margin-top: 50px;
+    width: 80vw;
+    margin-top: 100px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .choice{
     font-size: 20px;
     padding: 20px 30px;
     margin-bottom: 20px;
-    margin-right: 40px;
+    margin-right: 30px;
     cursor: pointer;
     border-radius: 3px;
     background: linear-gradient(-90deg,#ffc14f, #e2b500);
     border: 1px solid #0800a1;
     color: #0800a1;
     font-weight: 600;
-    text-shadow: 2px 2px 5px #0000003f;
+    text-shadow: 2px 2px 5px #0095ff62;
+
+    box-shadow: 3px 3px 10px #0000006d;
+    transition: 250ms ease-in-out;
+
+    width: 250px;
+}
+
+.choice:hover{
+
+}
+
+.choice:active{
+    box-shadow: none;
 }

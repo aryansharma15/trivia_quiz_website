@@ -41,6 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
+	function decodeHtmlEntities(text) {
+		const parser = new DOMParser();
+		const decoded = parser.parseFromString(`<!doctype html><body>${text}`, "text/html").body.textContent;
+		return decoded;
+	}
+
 	function displayQuestions(quesData) {
 		// const questions = document.getElementsByClassName("questions");
 		const questions = document.querySelector(".questions");
@@ -62,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		shuffledChoices.forEach((choice) => {
 			const optionElement = document.createElement("button");
 			optionElement.classList.add("choice");
-			optionElement.textContent = choice;
+
+			const decodedChoice = decodeHtmlEntities(choice);
+			optionElement.textContent = decodedChoice;
 
 			optionElement.addEventListener("click", () => {
 				checkAnswer(choice === quesData.correct_answer);
@@ -75,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		questions.appendChild(questionElement);
 	}
 
-	async function startQuiz(diffic) {
+	async function startQuiz(categ, diffic) {
 		// const apiUrl = `https://opentdb.com/api.php?amount=10&category=19&difficulty=${diffic}&type=multiple`;
 		const apiUrl = `https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple`;
 		const data = await fetch(apiUrl);
@@ -96,11 +104,22 @@ document.addEventListener("DOMContentLoaded", () => {
 		};
 
 		const optionsContainer = document.querySelector(".options");
-		optionsContainer.addEventListener("click", () => {
-			displayNextQues();
-		});
+		console.log(optionsContainer);
+		// optionsContainer.addEventListener("click", (event) => {
+		// 	if (event.target.classList.contains("choice")) {
+		// 		checkAnswer(event.target.textContent === quesData.correct_answer);
+		// 		displayNextQues();
+		// 	}
+		// });
 
 		displayNextQues();
+
+		const nextButton = document.getElementById("next-btn");
+
+		nextButton.addEventListener("click", () => {
+			displayNextQues();
+			console.log("Next button clicked");
+		});
 
 		console.log(res);
 	}
