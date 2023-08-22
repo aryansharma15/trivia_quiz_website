@@ -10,7 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
 	const alertMessage = document.getElementById("modal-message");
 	const alertBtn = document.getElementById("modal-close-btn");
 
-	const time = document.getElementsByClassName("time")[0];
+	// const time = document.getElementsByClassName("time")[0];
+
+	// display next question logic
+	let currentQuestionIndex = 0;
+
+	function displayNextQues() {
+		if (currentQuestionIndex < l) {
+			const currentQuestion = questions[currentQuestionIndex];
+			displayQuestions(currentQuestion);
+			currentQuestionIndex++;
+		} else {
+			console.log("Quiz Complete");
+		}
+	}
 
 	function selBackground(selection) {
 		if (selection.value === "") {
@@ -36,8 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function checkAnswer(isCorrect) {
 		if (isCorrect) {
+			console.log("Correct Answer!");
 		} else {
+			console.log("Incorrect Answer.");
 		}
+
+		displayNextQues();
 	}
 
 	function decodeHtmlEntities(text) {
@@ -54,7 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		const questionElement = document.createElement("div");
 		questionElement.classList.add("question");
 
-		questionElement.textContent = quesData.question;
+		// questionElement.textContent = quesData.question;
+		const decodedQuestion = decodeHtmlEntities(quesData.question); // Decode the question text
+		questionElement.textContent = decodedQuestion;
 
 		const answerChoices = [...quesData.incorrect_answers, quesData.correct_answer];
 		const shuffledChoices = shuffleArr(answerChoices);
@@ -87,28 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		const data = await fetch(apiUrl);
 		const res = await data.json();
 
-		const questions = res.results;
+		questions = res.results;
 		l = questions.length;
 		let currentQuestionIndex = 0;
-
-		const displayNextQues = () => {
-			if (currentQuestionIndex < l) {
-				const currentQuestion = questions[currentQuestionIndex];
-				displayQuestions(currentQuestion);
-				currentQuestionIndex++;
-			} else {
-				console.log("Quiz Complete");
-			}
-		};
 
 		displayNextQues();
 
 		const nextButton = document.getElementById("next-btn");
-
-		nextButton.addEventListener("click", () => {
-			displayNextQues();
-			console.log("Next button clicked");
-		});
+		nextButton.addEventListener("click", displayNextQues);
 
 		console.log(res);
 	}
@@ -142,10 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				});
 
 				startQuiz(selectedCategory, selectedDifficulty);
-
-				// console.log(backBtn);
-				// console.log(selectedCategory);
-				// console.log(selectedDifficulty);
 			} else if (selectedCategory === "" && selectedDifficulty !== "") {
 				showAlert("Please select a valid category to continue.");
 			} else if (selectedCategory !== "" && selectedDifficulty === "") {
@@ -156,9 +157,42 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
-	function showAlert(message) {
-		alert.style.display = "flex";
+	// function showAlert(message) {
+	// 	alert.style.display = "flex";
+	// 	alertMessage.textContent = message;
+	// }
+
+	function showVanishingAlert(message, duration = 2000) {
+		const alertContainer = document.createElement("div");
+		alertContainer.className = "auto-vanishing-alert";
+
+		const alertMessage = document.createElement("p");
 		alertMessage.textContent = message;
+
+		alertContainer.appendChild(alertMessage);
+		document.body.appendChild(alertContainer);
+
+		setTimeout(() => {
+			document.body.removeChild(alertContainer);
+		}, duration);
+	}
+
+	function showClickableAlert(message) {
+		const alertContainer = document.createElement("div");
+		alertContainer.className = "clickable-alert";
+
+		const alertMessage = document.createElement("p");
+		alertMessage.textContent = message;
+
+		const closeButton = document.createElement("button");
+		closeButton.textContent = "Close";
+		closeButton.addEventListener("click", () => {
+			document.body.removeChild(alertContainer);
+		});
+
+		alertContainer.appendChild(alertMessage);
+		alertContainer.appendChild(closeButton);
+		document.body.appendChild(alertContainer);
 	}
 
 	window.onload = () => {
