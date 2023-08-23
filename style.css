@@ -262,10 +262,6 @@ nav{
     width: 250px;
 }
 
-.choice:hover{
-
-}
-
 .choice:active{
     box-shadow: none;
 }
@@ -275,7 +271,6 @@ nav{
     font-size: 18px;
     font-weight: 600;
     padding: 20px 40px;
-    /* border: 2px solid ; */
     border-radius: 5px;
     box-shadow: 3px 3px 10px #0000006d;
     cursor: pointer;

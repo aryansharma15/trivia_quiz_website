@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const incorrectScore = document.getElementById("incorrect-result");
 		const passedResult = document.getElementById("passed-result");
 
-		let i = 10 * correctAnswers - 5 * incorrectAnswers;
+		let i = 10 * correctAnswers - 2 * incorrectAnswers;
 
 		let j = 10 - (correctAnswers + incorrectAnswers);
 
@@ -23,6 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		correctScore.textContent = `You answered ${correctAnswers} questions correctly. (x10)`;
 		incorrectScore.textContent = `You answered ${incorrectAnswers} questions correctly. (x-5)`;
 		passedResult.textContent = `You passed on ${j} questions.`;
+
+		// Correct answers displayed...
+		const questionsContainer = document.querySelector(".questions");
+		const correctAnswerElements = document.querySelectorAll(".correct-answer");
+
+		correctAnswerElements.forEach((correctAnswerElement) => {
+			const clonedCorrectAnswer = correctAnswerElement.cloneNode(true);
+			questionsContainer.appendChild(clonedCorrectAnswer);
+		});
 	}
 
 	function showScore(correctAnswers, incorrectAnswers) {
@@ -72,12 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function checkAnswer(isCorrect) {
 		if (isCorrect) {
-			console.log("Correct Answer!");
+			// console.log("Correct Answer!");
 			showVanishingAlert("Correct! Well Done.", 2000);
 			correctAns++;
 		} else {
 			showVanishingAlert("Incorrect. Focus!", 2000);
-			console.log("Incorrect Answer.");
+			// console.log("Incorrect Answer.");
 			incorrectAns++;
 		}
 
@@ -110,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		const optionsContainer = document.createElement("div");
 		optionsContainer.classList.add("options");
 
-		// console.log(questions);
 		shuffledChoices.forEach((choice) => {
 			const optionElement = document.createElement("button");
 			optionElement.classList.add("choice");
