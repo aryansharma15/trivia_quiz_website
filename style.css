@@ -297,11 +297,22 @@ nav{
 
 .score-section{
     display: none;
-
     background: linear-gradient(-22.5deg, #9500ff, #b500eb, #db00c0, #ea0069);
     color: #FFFFFF;
     height: 600px;
     margin: auto;
     text-align: center;
     padding: 60px 0px;
+
+    font-family: 'Handjet';
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.correct-option{
+    background-color: #008000;
+}
+
+.incorrect-option{
+    background-color: #b60000;
 }

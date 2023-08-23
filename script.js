@@ -9,6 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
 	let correctAns = 0;
 	let incorrectAns = 0;
 
+	function resultDisplay(correctAnswers, incorrectAnswers) {
+		const resultScore = document.getElementById("score-result");
+		const correctScore = document.getElementById("correct-result");
+		const incorrectScore = document.getElementById("incorrect-result");
+		const passedResult = document.getElementById("passed-result");
+
+		let i = 10 * correctAnswers - 5 * incorrectAnswers;
+
+		let j = 10 - (correctAnswers + incorrectAnswers);
+
+		resultScore.textContent = `Your final score is: ${i}`;
+		correctScore.textContent = `You answered ${correctAnswers} questions correctly. (x10)`;
+		incorrectScore.textContent = `You answered ${incorrectAnswers} questions correctly. (x-5)`;
+		passedResult.textContent = `You passed on ${j} questions.`;
+	}
+
 	function showScore(correctAnswers, incorrectAnswers) {
 		// const totalQuesElem = document.getElementById("total-questions");
 		const correctAnsElem = document.getElementById("correct-ans");
@@ -57,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	function checkAnswer(isCorrect) {
 		if (isCorrect) {
 			console.log("Correct Answer!");
-			showVanishingAlert("Correct! Well Done", 2000);
+			showVanishingAlert("Correct! Well Done.", 2000);
 			correctAns++;
 		} else {
 			showVanishingAlert("Incorrect. Focus!", 2000);
@@ -67,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		displayNextQues();
 		showScore(correctAns, incorrectAns);
+		resultDisplay(correctAns, incorrectAns);
 	}
 
 	function decodeHtmlEntities(text) {
@@ -116,13 +133,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		// const apiUrl = `https://opentdb.com/api.php?amount=10&category=19&difficulty=${diffic}&type=multiple`;
 		let dif = diffic.toLowerCase();
 		// console.log(dif);
-		console.log(categ);
+		// console.log(categ);
 		const apiUrl = `https://opentdb.com/api.php?amount=10&category=${categ}&difficulty=${dif}&type=multiple`;
 		try {
-			console.log(apiUrl);
+			// console.log(apiUrl);
 			const data = await fetch(apiUrl);
 			const res = await data.json();
-			console.log(res);
+			// console.log(res);
 
 			if (data.status !== 200) {
 				console.error("API Error:", data.status, data.statusText);
@@ -131,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			questions = res.results;
 			l = questions.length;
-			let currentQuestionIndex = 0;
+			// let currentQuestionIndex = 0;
 
 			displayNextQues();
 
@@ -165,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		startBtn.addEventListener("click", () => {
 			const selectedCategory = selCateg.options[selCateg.selectedIndex];
 			const selectedCategoryId = selectedCategory.getAttribute("data-id");
-			console.log(selectedCategoryId);
+			// console.log(selectedCategoryId);
 			const selectedDifficulty = selDiffic.value;
 
 			if (selectedCategory !== "" && selectedDifficulty !== "") {
@@ -202,8 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		setTimeout(() => {
 			document.body.removeChild(alertContainer);
 		}, duration);
-
-		console.log("vanishing alert is showing...");
 	}
 
 	function showClickableAlert(message) {
@@ -222,7 +237,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		alertContainer.appendChild(alertMessage);
 		alertContainer.appendChild(closeButton);
 		document.body.appendChild(alertContainer);
-		console.log("clickable alert is showing...");
 	}
 
 	window.onload = () => {
