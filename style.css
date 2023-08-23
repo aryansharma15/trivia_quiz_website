@@ -145,7 +145,7 @@ nav{
     transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #ccc;
-    padding: 60px 100px;
+    padding: 100px 200px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;

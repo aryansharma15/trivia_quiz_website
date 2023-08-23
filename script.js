@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	function checkAnswer(isCorrect) {
 		if (isCorrect) {
 			console.log("Correct Answer!");
-			showVanishingAlert("Correct!", 1000);
+			showVanishingAlert("Correct! Well Done", 1000);
 		} else {
 			showVanishingAlert("Incorrect. Focus!", 1000);
 			console.log("Incorrect Answer.");
@@ -104,23 +104,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	async function startQuiz(categ, diffic) {
 		// const apiUrl = `https://opentdb.com/api.php?amount=10&category=19&difficulty=${diffic}&type=multiple`;
-		const apiUrl = `https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple`;
-		const data = await fetch(apiUrl);
-		const res = await data.json();
+		let dif = diffic.toLowerCase();
+		// console.log(dif);
+		console.log(categ);
+		const apiUrl = `https://opentdb.com/api.php?amount=10&category=${categ}&difficulty=${dif}&type=multiple`;
+		try {
+			console.log(apiUrl);
+			const data = await fetch(apiUrl);
+			const res = await data.json();
+			console.log(res);
 
-		questions = res.results;
-		l = questions.length;
-		let currentQuestionIndex = 0;
+			if (data.status !== 200) {
+				console.error("API Error:", data.status, data.statusText);
+				// Handle the error appropriately
+			}
 
-		displayNextQues();
+			questions = res.results;
+			l = questions.length;
+			let currentQuestionIndex = 0;
 
-		const nextButton = document.getElementById("next-btn");
-		nextButton.addEventListener("click", () => {
 			displayNextQues();
-			showVanishingAlert("Passed");
-		});
 
-		console.log(res);
+			const nextButton = document.getElementById("next-btn");
+			nextButton.addEventListener("click", () => {
+				displayNextQues();
+				showVanishingAlert("Passed");
+			});
+
+			console.log(res);
+		} catch (error) {
+			console.error("Error fetching questions: ", error);
+			showVanishingAlert("Error occurred while fetching questions");
+		}
 	}
 
 	function listeners() {
@@ -138,7 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		startBtn.addEventListener("click", () => {
-			const selectedCategory = selCateg.value;
+			const selectedCategory = selCateg.options[selCateg.selectedIndex];
+			const selectedCategoryId = selectedCategory.getAttribute("data-id");
+			console.log(selectedCategoryId);
 			const selectedDifficulty = selDiffic.value;
 
 			if (selectedCategory !== "" && selectedDifficulty !== "") {
@@ -151,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					quizForfeit();
 				});
 
-				startQuiz(selectedCategory, selectedDifficulty);
+				startQuiz(selectedCategoryId, selectedDifficulty);
 			} else if (selectedCategory === "" && selectedDifficulty !== "") {
 				showClickableAlert("Please select a valid category to continue.");
 			} else if (selectedCategory !== "" && selectedDifficulty === "") {
