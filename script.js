@@ -1,20 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-	// const api = "https://the-trivia-api.com/v2/questions";
 	const selDiffic = document.getElementById("diffic");
 	const selCateg = document.getElementById("categ");
 	const startBtn = document.getElementsByClassName("start-btn")[0];
 	const landingContent = document.getElementsByClassName("top-content")[0];
 	const quizSect = document.getElementsByClassName("quiz-section")[0];
+	const scoreSection = document.getElementsByClassName("score-section")[0];
 
-	const alert = document.getElementById("custom-modal");
-	const alertMessage = document.getElementById("modal-message");
-	const alertBtn = document.getElementById("modal-close-btn");
+	let correctAns = 0;
+	let incorrectAns = 0;
 
-	// const time = document.getElementsByClassName("time")[0];
+	function showScore(correctAnswers, incorrectAnswers) {
+		// const totalQuesElem = document.getElementById("total-questions");
+		const correctAnsElem = document.getElementById("correct-ans");
+		const incorrectAnsElem = document.getElementById("incorrect-ans");
+
+		correctAnsElem.textContent = `Correct Answers: ${correctAnswers}`;
+		incorrectAnsElem.textContent = `Incorrect Answers: ${incorrectAnswers}`;
+	}
 
 	// display next question logic
 	let currentQuestionIndex = 0;
-
 	function displayNextQues() {
 		if (currentQuestionIndex < l) {
 			const currentQuestion = questions[currentQuestionIndex];
@@ -22,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			currentQuestionIndex++;
 		} else {
 			console.log("Quiz Complete");
+			quizSect.style.display = "none";
+			scoreSection.style.display = "block";
 		}
 	}
 
@@ -50,13 +57,16 @@ document.addEventListener("DOMContentLoaded", () => {
 	function checkAnswer(isCorrect) {
 		if (isCorrect) {
 			console.log("Correct Answer!");
-			showVanishingAlert("Correct! Well Done", 1000);
+			showVanishingAlert("Correct! Well Done", 2000);
+			correctAns++;
 		} else {
-			showVanishingAlert("Incorrect. Focus!", 1000);
+			showVanishingAlert("Incorrect. Focus!", 2000);
 			console.log("Incorrect Answer.");
+			incorrectAns++;
 		}
 
 		displayNextQues();
+		showScore(correctAns, incorrectAns);
 	}
 
 	function decodeHtmlEntities(text) {
@@ -178,11 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 	}
-
-	// function showAlert(message) {
-	// 	alert.style.display = "flex";
-	// 	alertMessage.textContent = message;
-	// }
 
 	function showVanishingAlert(message, duration = 2000) {
 		const alertContainer = document.createElement("div");

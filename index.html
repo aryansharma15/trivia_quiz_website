@@ -21,8 +21,8 @@
 
     <div class="top-content">
         <h1>Welcome to You Snooze, You Lose!</h1>
-        <p>Get ready to test your knowledge across various themes. Stay sharp, the clock isn't your friend! Challenge yourself on *Hard* difficulty or
-            just relax with the *Easy* mode. <br>How many questions can you answer before the timer runs out? Let's see!</p>
+        <p>Get ready to test your knowledge across various themes. Stay sharp, the topic isn't your friend! Challenge yourself on *Hard* difficulty or
+            just relax with the *Easy* mode. <br>How many questions can you answer before luck runs out? Let's see!</p>
 
         <div class="diff-categ">
             <select name="difficulty" id="diffic">
@@ -38,7 +38,7 @@
                 <option value="Politics" data-id="24">Politics</option>
                 <option value="History" data-id="23">History</option>
                 <option value="Music" data-id="12">Music</option>
-                <option value="Science: Nature" data-id="16">Science and Nature</option>
+                <option value="Science: Nature" data-id="17">Science and Nature</option>
                 <option value="Technology" data-id="18">Technology</option>
                 <option value="Film" data-id="11">Films</option>
                 <option value="Television" data-id="14">Television</option>
@@ -72,9 +72,9 @@
         </button>
 
         <div class="score-card">
-            <p>Total Questions : 10</p>
-            <p>Correctly Answered : </p>
-            <p>Questions Remaining : </p>
+            <p id="total-questions">Total Questions : 10</p>
+            <p id="correct-ans">Correctly Answered : </p>
+            <p id="incorrect-ans">Incorrectly Answered : </p>
         </div>
 
         <div class="timer">
@@ -90,6 +90,12 @@
             <button id="next-btn">Next Question</button>
         </div>
 
+    </div>
+
+    <div class="score-section">
+        <div class="final-scores">
+            <p id="score-para">Your final score is: </p>
+        </div>
     </div>
     
     <div class="foot"> Icons made by <a href="https://www.flaticon.com/authors/mayor-icons" title="Mayor Icons"> Mayor Icons
