@@ -50,7 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	function checkAnswer(isCorrect) {
 		if (isCorrect) {
 			console.log("Correct Answer!");
+			showVanishingAlert("Correct!", 1000);
 		} else {
+			showVanishingAlert("Incorrect. Focus!", 1000);
 			console.log("Incorrect Answer.");
 		}
 
@@ -113,15 +115,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		displayNextQues();
 
 		const nextButton = document.getElementById("next-btn");
-		nextButton.addEventListener("click", displayNextQues);
+		nextButton.addEventListener("click", () => {
+			displayNextQues();
+			showVanishingAlert("Passed");
+		});
 
 		console.log(res);
 	}
 
 	function listeners() {
-		alertBtn.addEventListener("click", () => {
-			alert.style.display = "none";
-		});
+		// alertBtn.addEventListener("click", () => {
+		// 	alert.style.display = "none";
+		// });
 		selDiffic.addEventListener("input", () => {
 			selBackground(selDiffic);
 			selDiffic.blur();
@@ -148,11 +153,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				startQuiz(selectedCategory, selectedDifficulty);
 			} else if (selectedCategory === "" && selectedDifficulty !== "") {
-				showAlert("Please select a valid category to continue.");
+				showClickableAlert("Please select a valid category to continue.");
 			} else if (selectedCategory !== "" && selectedDifficulty === "") {
-				showAlert("Please select a valid difficulty to continue.");
+				showClickableAlert("Please select a valid difficulty to continue.");
 			} else {
-				showAlert("Please choose a category and a difficulty before continuing.");
+				showClickableAlert("Please choose a category and a difficulty before continuing.");
 			}
 		});
 	}
@@ -175,6 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		setTimeout(() => {
 			document.body.removeChild(alertContainer);
 		}, duration);
+
+		console.log("vanishing alert is showing...");
 	}
 
 	function showClickableAlert(message) {
@@ -185,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		alertMessage.textContent = message;
 
 		const closeButton = document.createElement("button");
-		closeButton.textContent = "Close";
+		closeButton.textContent = "OK";
 		closeButton.addEventListener("click", () => {
 			document.body.removeChild(alertContainer);
 		});
@@ -193,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		alertContainer.appendChild(alertMessage);
 		alertContainer.appendChild(closeButton);
 		document.body.appendChild(alertContainer);
+		console.log("clickable alert is showing...");
 	}
 
 	window.onload = () => {
