@@ -274,8 +274,7 @@ nav{
     border-radius: 5px;
     box-shadow: 3px 3px 10px #0000006d;
     cursor: pointer;
-    transition: active 250ms ease-in-out;
-
+    transition: 250ms ease-in-out;
 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -310,4 +309,26 @@ nav{
 
 .incorrect-option{
     background-color: #b60000;
+}
+
+#play-again{
+    margin-top: 80px;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 20px 40px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px #0000006d;
+    cursor: pointer;
+    transition: active 250ms ease-in-out;
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#play-again:hover{
+    background: linear-gradient(-45deg, #002766, #000000);
+    color: #ffffff;
+}
+
+#play-again:active{
+    box-shadow: none;
 }

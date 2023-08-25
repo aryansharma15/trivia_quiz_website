@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const landingContent = document.getElementsByClassName("top-content")[0];
 	const quizSect = document.getElementsByClassName("quiz-section")[0];
 	const scoreSection = document.getElementsByClassName("score-section")[0];
+	const playAgainBtn = document.getElementById("play-again");
 
 	let correctAns = 0;
 	let incorrectAns = 0;
@@ -21,17 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		resultScore.textContent = `Your final score is: ${i}`;
 		correctScore.textContent = `You answered ${correctAnswers} questions correctly. (x10)`;
-		incorrectScore.textContent = `You answered ${incorrectAnswers} questions correctly. (x-5)`;
+		incorrectScore.textContent = `You answered ${incorrectAnswers} questions correctly. (x-2)`;
 		passedResult.textContent = `You passed on ${j} questions.`;
 
 		// Correct answers displayed...
-		const questionsContainer = document.querySelector(".questions");
-		const correctAnswerElements = document.querySelectorAll(".correct-answer");
+		// const questionsContainer = document.querySelector(".questions");
+		// const correctAnswerElements = document.querySelectorAll(".correct-answer");
 
-		correctAnswerElements.forEach((correctAnswerElement) => {
-			const clonedCorrectAnswer = correctAnswerElement.cloneNode(true);
-			questionsContainer.appendChild(clonedCorrectAnswer);
-		});
+		// correctAnswerElements.forEach((correctAnswerElement) => {
+		// 	const clonedCorrectAnswer = correctAnswerElement.cloneNode(true);
+		// 	questionsContainer.appendChild(clonedCorrectAnswer);
+		// });
 	}
 
 	function showScore(correctAnswers, incorrectAnswers) {
@@ -48,7 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	function displayNextQues() {
 		if (currentQuestionIndex < l) {
 			const currentQuestion = questions[currentQuestionIndex];
-			displayQuestions(currentQuestion);
+			setTimeout(() => {
+				displayQuestions(currentQuestion);
+				console.log("we are in set timeout");
+			}, 1000);
 			currentQuestionIndex++;
 		} else {
 			console.log("Quiz Complete");
@@ -80,13 +84,22 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	function checkAnswer(isCorrect) {
+		const options = document.querySelectorAll(".choice");
+		options.forEach((option) => {
+			const decodedOption = decodeHtmlEntities(option.textContent);
+			if (decodedOption === questions[currentQuestionIndex - 1].correct_answer) {
+				option.classList.add("correct-option");
+			} else if (decodedOption === questions[currentQuestionIndex - 1].user_selected_answer && !isCorrect) {
+				option.classList.add("incorrect-option");
+			}
+			option.disabled = true; // Disable options after selection
+		});
+
 		if (isCorrect) {
-			// console.log("Correct Answer!");
 			showVanishingAlert("Correct! Well Done.", 2000);
 			correctAns++;
 		} else {
 			showVanishingAlert("Incorrect. Focus!", 2000);
-			// console.log("Incorrect Answer.");
 			incorrectAns++;
 		}
 
@@ -138,10 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	async function startQuiz(categ, diffic) {
-		// const apiUrl = `https://opentdb.com/api.php?amount=10&category=19&difficulty=${diffic}&type=multiple`;
 		let dif = diffic.toLowerCase();
-		// console.log(dif);
-		// console.log(categ);
 		const apiUrl = `https://opentdb.com/api.php?amount=10&category=${categ}&difficulty=${dif}&type=multiple`;
 		try {
 			// console.log(apiUrl);
@@ -166,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				showVanishingAlert("Passed");
 			});
 
-			console.log(res);
+			// console.log(res);
 		} catch (error) {
 			console.error("Error fetching questions: ", error);
 			showVanishingAlert("Error occurred while fetching questions");
@@ -211,6 +221,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			} else {
 				showClickableAlert("Please choose a category and a difficulty before continuing.");
 			}
+		});
+
+		playAgainBtn.addEventListener("click", () => {
+			quizForfeit;
 		});
 	}
 
