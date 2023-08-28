@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	let correctAns = 0;
 	let incorrectAns = 0;
+	let selectedOption = null;
 
 	function resultDisplay(correctAnswers, incorrectAnswers) {
 		const resultScore = document.getElementById("score-result");
@@ -51,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			const currentQuestion = questions[currentQuestionIndex];
 			setTimeout(() => {
 				displayQuestions(currentQuestion);
-				console.log("we are in set timeout");
 			}, 1000);
 			currentQuestionIndex++;
 		} else {
@@ -83,22 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		return shuffled;
 	}
 
-	function checkAnswer(isCorrect) {
-		const options = document.querySelectorAll(".choice");
-		options.forEach((option) => {
-			const decodedOption = decodeHtmlEntities(option.textContent);
-			if (decodedOption === questions[currentQuestionIndex - 1].correct_answer) {
-				option.classList.add("correct-option");
-			} else if (decodedOption === questions[currentQuestionIndex - 1].user_selected_answer && !isCorrect) {
-				option.classList.add("incorrect-option");
-			}
-			option.disabled = true; // Disable options after selection
-		});
-
+	function checkAnswer(isCorrect, selectedOption) {
 		if (isCorrect) {
+			selectedOption.classList.add("correct");
 			showVanishingAlert("Correct! Well Done.", 2000);
 			correctAns++;
 		} else {
+			selectedOption.classList.add("incorrect");
 			showVanishingAlert("Incorrect. Focus!", 2000);
 			incorrectAns++;
 		}
@@ -139,8 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			const decodedChoice = decodeHtmlEntities(choice);
 			optionElement.textContent = decodedChoice;
 
-			optionElement.addEventListener("click", () => {
-				checkAnswer(choice === quesData.correct_answer);
+			optionElement.addEventListener("click", (event) => {
+				selectedOption = event.target;
+				checkAnswer(choice === quesData.correct_answer, selectedOption);
 			});
 
 			optionsContainer.appendChild(optionElement);
@@ -223,9 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
-		playAgainBtn.addEventListener("click", () => {
-			quizForfeit;
-		});
+		playAgainBtn.addEventListener("click", quizForfeit);
 	}
 
 	function showVanishingAlert(message, duration = 2000) {

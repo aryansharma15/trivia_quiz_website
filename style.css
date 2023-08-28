@@ -303,11 +303,11 @@ nav{
     font-size: 30px;
 }
 
-.correct-option{
+.choice.correct{
     background-color: #008000;
 }
 
-.incorrect-option{
+.choice.incorrect{
     background-color: #b60000;
 }
 
